@@ -20,16 +20,6 @@
     ]
   },
   {
-    "objectID": "references.html",
-    "href": "references.html",
-    "title": "References",
-    "section": "",
-    "text": "Keydana, Sigrid. 2023. Deep Learning and Scientific Computing with r\nTorch. Chapman; Hall/CRC.",
-    "crumbs": [
-      "References"
-    ]
-  },
-  {
     "objectID": "intro.html#core-philosophy",
     "href": "intro.html#core-philosophy",
     "title": "1  About the book",
@@ -67,6 +57,16 @@
     "text": "1.4 License & Attribution\nThis work is licensed under a Creative Commons Attribution 4.0 International License.\nIf you use code snippets or architectures from this book in your own research, software, or publications, please cite the author as:\n\nHanis, Tengku Muhammad (2026). The R torch codebook. https://tengku-hanis.github.io/r_torch_codebook/",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>About the book</span>"
+    ]
+  },
+  {
+    "objectID": "references.html",
+    "href": "references.html",
+    "title": "References",
+    "section": "",
+    "text": "Keydana, Sigrid. 2023. Deep Learning and Scientific Computing with r\nTorch. Chapman; Hall/CRC.",
+    "crumbs": [
+      "References"
     ]
   }
 ]
