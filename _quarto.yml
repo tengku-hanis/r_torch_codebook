@@ -1,0 +1,34 @@
+project:
+  type: book
+  output-dir: docs
+
+book:
+  title: "The R torch codebook"
+  author: "Tengku Muhammad Hanis Bin Tengku Mokhtar, PhD"
+  date: last-modified
+  date-format: "MM/DD/YYYY"
+  cover-image: images/book_cover.png
+  favicon: images/thumbnail.png
+  chapters:
+    - index.qmd
+    - intro.qmd
+    - tabular.qmd
+    - text.qmd
+    - image.qmd
+    - audio.qmd
+    - video.qmd
+    - others.qmd
+    - references.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme:
+      - cosmo
+      - brand
+  pdf:
+    documentclass: scrreprt
+
+editor: visual
+

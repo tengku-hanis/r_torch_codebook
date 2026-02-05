@@ -1,0 +1,13 @@
+# Preface {.unnumbered}
+
+Deep learning (DL) and artificial intelligence (AI) are very popular nowadays — at least in Malaysia at the time I am writing this chapter. There are numerous open‑source and freely available resources to learn these topics, especially deep learning. The two most popular software ecosystems used in this area are Python and R. Python has been the industry standard; R, however, is catching up quickly.
+
+In the Python ecosystem the two main libraries are TensorFlow and PyTorch. On the R side there are corresponding packages: tensorflow and torch. The tensorflow R package is essentially a wrapper around the Python TensorFlow API: although we write code in R, computations run in Python on the backend, and many error and warning messages therefore originate from Python. In recent years TensorFlow has reduced its GPU support. At the time of writing, macOS 12.0 (Monterey) or later (64‑bit) does not have official GPU support, and Windows (native) — Windows 7 or later (64‑bit) — also lacks GPU support for TensorFlow versions beyond 2.10. Despite these limitations, TensorFlow’s earlier establishment means there is a large selection of tutorials and books for running deep learning with TensorFlow.
+
+PyTorch (and the R torch package) was developed later than TensorFlow. Consequently, there are fewer tutorials and books for PyTorch and especially for torch in R. Nevertheless, a major advantage of PyTorch and torch is that GPU support is available and is often easier to set up than it used to be for TensorFlow. The relative scarcity of learning resources remains, however. At the time of writing, the most complete reference for torch is [Deep Learning and Scientific Computing with R torch by Sigrid Keydana](https://skeydan.github.io/Deep-Learning-and-Scientific-Computing-with-R-torch/) [@keydana2023deep].
+
+This book is my effort to compile R code related to torch — not only to consolidate my own understanding, but also to provide a practical resource for others. I hope this work will be a useful contribution.
+
+Lastly, I want to express my gratitude and deep love to my late wife, Nurul Asmaq (al‑Fatihah); without her I am not who I am today. To my son Hanif and to my parents, Tengku Mokhtar and Nor Malaysia, I love you all more than I can express. Thank you for always supporting me.
+
+[Tengku Muhammad Hanis Bin Tengku Mokhtar, PhD](https://tengkuhanis.netlify.app/)

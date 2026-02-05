@@ -1,0 +1,32 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "The R torch codebook",
+    "section": "",
+    "text": "Preface\nDeep learning (DL) and artificial intelligence (AI) are very popular nowadays — at least in Malaysia at the time I am writing this chapter. There are numerous open‑source and freely available resources to learn these topics, especially deep learning. The two most popular software ecosystems used in this area are Python and R. Python has been the industry standard; R, however, is catching up quickly.\nIn the Python ecosystem the two main libraries are TensorFlow and PyTorch. On the R side there are corresponding packages: tensorflow and torch. The tensorflow R package is essentially a wrapper around the Python TensorFlow API: although we write code in R, computations run in Python on the backend, and many error and warning messages therefore originate from Python. In recent years TensorFlow has reduced its GPU support. At the time of writing, macOS 12.0 (Monterey) or later (64‑bit) does not have official GPU support, and Windows (native) — Windows 7 or later (64‑bit) — also lacks GPU support for TensorFlow versions beyond 2.10. Despite these limitations, TensorFlow’s earlier establishment means there is a large selection of tutorials and books for running deep learning with TensorFlow.\nPyTorch (and the R torch package) was developed later than TensorFlow. Consequently, there are fewer tutorials and books for PyTorch and especially for torch in R. Nevertheless, a major advantage of PyTorch and torch is that GPU support is available and is often easier to set up than it used to be for TensorFlow. The relative scarcity of learning resources remains, however. At the time of writing, the most complete reference for torch is Deep Learning and Scientific Computing with R torch by Sigrid Keydana (Keydana 2023).\nThis book is my effort to compile R code related to torch — not only to consolidate my own understanding, but also to provide a practical resource for others. I hope this work will be a useful contribution.\nLastly, I want to express my gratitude and deep love to my late wife, Nurul Asmaq (al‑Fatihah); without her I am not who I am today. To my son Hanif and to my parents, Tengku Mokhtar and Nor Malaysia, I love you all more than I can express. Thank you for always supporting me.\nTengku Muhammad Hanis Bin Tengku Mokhtar, PhD\n\n\n\n\nKeydana, Sigrid. 2023. Deep Learning and Scientific Computing with r Torch. Chapman; Hall/CRC.",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "intro.html",
+    "href": "intro.html",
+    "title": "1  About the book",
+    "section": "",
+    "text": "Welcome to The R torch codebook.\nThis book is a consolidated repository of R code for deep learning using the torch ecosystem. Unlike traditional textbooks, this is not a theoretical guide. It is designed as a functional compendium for practitioners who want to move straight to implementation across diverse data modalities.\n\n1.0.1 Core Philosophy\nThe aim of this book is to provide a single, searchable location for all R-based torch implementations.\n\nCode-First: Text is kept to a minimum. The value lies in the executable syntax.\nModality-Driven: Chapters are organized by data type (Tabular, Image, Audio, Video), reflecting the progression of tensor dimensions and architectural complexity.\nStandardized Workflow: Every analysis follows a consistent logical flow:\n\nDataset Description: A brief overview of the data used.\nObjectives: The specific goal of the deep learning task (e.g., classification, regression).\nImplementation: The complete torch code required to load data, build the model, and execute training.\n\n\n\n\n1.0.2 How to Use This Book\nThis book assumes a working knowledge of the R programming language and a basic understanding of deep learning concepts (like backpropagation and gradient descent).\nReaders are encouraged to:\n\nSearch by Modality: Use the sidebar to find the data type relevant to your project.\nAdapt the Recipes: Copy the code blocks and swap the dataset description/loader with your own local data.\nCross-Reference: Observe how torch handles different tensor dimensions as you move from Tabular (2D) to Video (5D) data.\n\n\n\n1.0.3 Technical Stack\nAll examples are built using the latest versions of the following R packages:\n\ntorch: The core tensor and autograd library.\nluz: High-level API for model training and management.\ntorchvision / torchaudio: Specialized utilities for imaging and signal processing.\n\n\n\n1.0.4 License & Attribution\nThis work is licensed under a Creative Commons Attribution 4.0 International License.\nIf you use code snippets or architectures from this book in your own research, software, or publications, please cite the author as:\n\nHanis, T. M. (2026). The R torch codebook. https://github.com/[your-username]/[your-repo]",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>About the book</span>"
+    ]
+  },
+  {
+    "objectID": "references.html",
+    "href": "references.html",
+    "title": "References",
+    "section": "",
+    "text": "Keydana, Sigrid. 2023. Deep Learning and Scientific Computing with r\nTorch. Chapman; Hall/CRC.",
+    "crumbs": [
+      "References"
+    ]
+  }
+]

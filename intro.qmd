@@ -1,0 +1,51 @@
+# About the book
+
+Welcome to **The R torch codebook**.
+
+This book is a consolidated repository of R code for deep learning using the `torch` ecosystem. Unlike traditional textbooks, this is not a theoretical guide. It is designed as a **functional compendium** for practitioners who want to move straight to implementation across diverse data modalities.
+
+### Core Philosophy
+
+The aim of this book is to provide a single, searchable location for all R-based `torch` implementations.
+
+-   **Code-First:** Text is kept to a minimum. The value lies in the executable syntax.
+
+-   **Modality-Driven:** Chapters are organized by data type (Tabular, Image, Audio, Video), reflecting the progression of tensor dimensions and architectural complexity.
+
+-   **Standardized Workflow:** Every analysis follows a consistent logical flow:
+
+    1.  **Dataset Description:** A brief overview of the data used.
+
+    2.  **Objectives:** The specific goal of the deep learning task (e.g., classification, regression).
+
+    3.  **Implementation:** The complete `torch` code required to load data, build the model, and execute training.
+
+### How to Use This Book
+
+This book assumes a working knowledge of the R programming language and a basic understanding of deep learning concepts (like backpropagation and gradient descent).
+
+Readers are encouraged to:
+
+1.  **Search by Modality:** Use the sidebar to find the data type relevant to your project.
+
+2.  **Adapt the Recipes:** Copy the code blocks and swap the dataset description/loader with your own local data.
+
+3.  **Cross-Reference:** Observe how `torch` handles different tensor dimensions as you move from Tabular (2D) to Video (5D) data.
+
+### Technical Stack
+
+All examples are built using the latest versions of the following R packages:
+
+-   **`torch`**: The core tensor and autograd library.
+
+-   **`luz`**: High-level API for model training and management.
+
+-   **`torchvision` / `torchaudio`**: Specialized utilities for imaging and signal processing.
+
+### License & Attribution
+
+This work is licensed under a [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).
+
+If you use code snippets or architectures from this book in your own research, software, or publications, please cite the author as:
+
+> **Hanis, T. M. (2026). *The R torch codebook*. <https://github.com/>\[your-username\]/\[your-repo\]**
