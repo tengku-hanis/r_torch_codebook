@@ -8,7 +8,7 @@ book:
   date: last-modified
   date-format: "MM/DD/YYYY"
   cover-image: images/book_cover.png
-  favicon: images/thumbnail.png
+  favicon: images/thumbnail2.png
   chapters:
     - index.qmd
     - intro.qmd
