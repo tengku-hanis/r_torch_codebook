@@ -4,7 +4,8 @@
 
 This work is licensed under a [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).
 
-Citation
+# Citation
+
 If you use code snippets or content from this book in your projects, research, or publications, please cite it as follows:
 
-Author Name (2026). The R torch codebook. Available at: [Link to your GitHub Repo]
+Hanis, Tengku Muhammad (2026). The R torch codebook. Available at: [Link to your GitHub Repo]
