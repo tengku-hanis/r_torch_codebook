@@ -48,4 +48,4 @@ This work is licensed under a [Creative Commons Attribution 4.0 International Li
 
 If you use code snippets or architectures from this book in your own research, software, or publications, please cite the author as:
 
-> **Hanis, T. M. (2026). *The R torch codebook*. <https://github.com/>\[your-username\]/\[your-repo\]**
+> **Hanis, Tengku Muhammad (2026). *The R torch codebook*. <https://tengku-hanis.github.io/r_torch_codebook/>**
