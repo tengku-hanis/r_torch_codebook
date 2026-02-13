@@ -1,0 +1,338 @@
+# Tutorial 3: Deep neural network with explainable method (binary classification)
+
+**Aims:** To predict heart disease using a deep neural network - To explain model predictions using Layer-wise Relevance Propagation (LRP) - To visualize feature importance at both individual and global levels
+
+**Data:** `heartdisease` data from `MLDataR` package.
+
+**Code description:** This code demonstrates the use of torch with custom dataset functions, training callbacks, and model explainability using the `innsight` package for binary classification with LRP.
+
+### **Packages**
+
+```{r}
+#| warning: false
+#| message: false
+library(torch)
+library(luz)
+library(tidyverse)
+library(tidymodels)
+library(MLDataR)
+library(innsight)
+```
+
+### **Data**
+
+```{r}
+heart_df <- 
+  heartdisease %>% 
+  mutate(across(c(Sex, RestingECG, Angina), as.factor))
+```
+
+**Explore data.**
+
+```{r}
+skimr::skim(heart_df)
+```
+
+### **Dataset function**
+
+```{r}
+heart_dataset <- dataset(
+  initialize = function(df) {
+    # Pre-process and store as tensors
+    self$x_num <- df %>% 
+      select(Age, RestingBP, Cholesterol, FastingBS, MaxHR, HeartPeakReading) %>% 
+      mutate(across(everything(), scale)) %>% 
+      as.matrix() %>% 
+      torch_tensor(dtype = torch_float())
+    
+    self$x_cat <- model.matrix(~ Sex + RestingECG + Angina, data = df)[, -1] %>% 
+      as.matrix() %>% 
+      torch_tensor(dtype = torch_float())
+    
+    self$y <- torch_tensor(as.matrix(df$HeartDisease), dtype = torch_float())
+  },
+  .getitem = function(i) {
+    list(x = list(self$x_num[i, ], self$x_cat[i, ]), y = self$y[i])      
+  },
+  .length = function() {
+    self$y$size(1)
+  }
+)
+
+# Convert to torch dataset
+ds_tensor <- heart_dataset(heart_df)
+ds_tensor[1]
+```
+
+### **Split data with dataset subsets**
+
+```{r}
+set.seed(123) 
+n <- nrow(heart_df)
+train_size <- floor(0.6 * n)
+valid_size <- floor(0.2 * n)
+
+# Create indices
+all_indices <- 1:n
+train_indices <- sample(all_indices, size = train_size)
+
+remaining_indices <- setdiff(all_indices, train_indices)
+valid_indices <- sample(remaining_indices, size = valid_size)
+
+test_indices <- setdiff(remaining_indices, valid_indices)
+
+# Create Subsets
+train_ds <- dataset_subset(ds_tensor, train_indices)
+valid_ds <- dataset_subset(ds_tensor, valid_indices)
+test_ds  <- dataset_subset(ds_tensor, test_indices)
+```
+
+### **Convert to dataloader**
+
+```{r}
+train_dl <- train_ds %>% 
+  dataloader(batch_size = 10, shuffle = TRUE)
+
+valid_dl <- valid_ds %>% 
+  dataloader(batch_size = 10, shuffle = FALSE)
+
+test_dl <- test_ds %>% 
+  dataloader(batch_size = 10, shuffle = FALSE)
+```
+
+### **Specify the model**
+
+```{r}
+net <- 
+  nn_module(
+    initialize = function(d_in){
+      self$net <- nn_sequential(
+        nn_linear(d_in, 32),
+        nn_relu(),
+        nn_dropout(0.5),
+        nn_linear(32, 64),
+        nn_relu(),
+        nn_dropout(0.5),
+        nn_linear(64, 1),
+        nn_sigmoid()
+      )
+    },
+    forward = function(x){
+      # x is currently a list of two tensors (numeric and categorical)
+      # Concatenate them along the feature dimension (dim=2)
+      input <- torch_cat(x, dim = 2)
+      self$net(input)
+    }
+  )
+```
+
+### **Fit the model**
+
+**Set parameters**
+
+```{r}
+d_in <- length(ds_tensor[1]$x[[1]]) + length(ds_tensor[1]$x[[2]]) # total number of features (6 numeric + 4 categorical = 10)
+```
+
+**Fit with callbacks**
+
+```{r}
+fitted <- 
+  net %>% 
+  setup(
+    loss = nn_bce_loss(),
+    optimizer = optim_adam,
+    metrics = list(
+      luz_metric_binary_accuracy(), 
+      luz_metric_binary_auroc()
+    )
+  ) %>% 
+  set_hparams(d_in = d_in) %>% 
+  fit(
+    train_dl, 
+    epoch = 50, 
+    valid_data = valid_dl,
+    callbacks = list(
+      luz_callback_early_stopping(patience = 10),
+      luz_callback_keep_best_model()
+    )
+  )
+```
+
+### **Training plot**
+
+```{r}
+fitted %>% plot()
+```
+
+**Better plot**
+
+```{r}
+hist <- get_metrics(fitted)
+
+optimal_epoch <- hist %>%
+  filter(metric == "loss", set == "valid") %>%
+  slice_min(value, n = 1) %>%
+  pull(epoch)
+
+hist %>%
+  ggplot(aes(x = epoch, y = value, color = set)) +
+  geom_line(linewidth = 1) +
+  geom_point(size = 1.5) +
+  facet_wrap(~ metric, scales = "free_y", ncol = 1) +
+  theme_minimal() +
+  labs(
+    title = "Training vs Validation Metrics",
+    subtitle = paste("Optimal epoch:", optimal_epoch),
+    y = "Value",
+    x = "Epoch",
+    color = "Dataset"
+  )
+```
+
+### **Predict testing set**
+
+```{r}
+y_pred <- fitted %>% predict(test_dl)
+y_true <- ds_tensor$y[test_ds$indices] %>% as_array()
+
+dat_pred <- 
+  y_pred %>% 
+  as_array() %>% 
+  as_data_frame() %>% 
+  rename(prob = V1) %>% 
+  mutate(
+    pred = factor(ifelse(prob > 0.5, 1, 0)),
+    true = factor(y_true)
+  )
+
+dat_pred
+```
+
+### **Evaluate**
+
+```{r}
+fitted %>% evaluate(test_dl)
+```
+
+**Confusion matrix**
+
+```{r}
+dat_pred %>% 
+  conf_mat(true, pred) %>% 
+  autoplot("heatmap")
+```
+
+**Accuracy**
+
+```{r}
+dat_pred %>% 
+  accuracy(truth = true, estimate = pred)
+```
+
+**Plot ROC**
+
+```{r}
+dat_pred %>% 
+  roc_curve(true, prob, event_level = "second") %>% 
+  autoplot()
+
+# ROC-AUC
+dat_pred %>% 
+  roc_auc(true, prob, event_level = "second")
+```
+
+### **Model explainability with LRP**
+
+**Prepare model for interpretation.**
+
+```{r}
+# Extract the sequential model
+model <- fitted$model$net$cpu()
+
+# Define input and output names
+input_names <- c(
+  # Numeric variables
+  "Age", "RestingBP", "Cholesterol", "FastingBS", "MaxHR", "HeartPeakReading",
+  # Categorical dummies (from model.matrix ~ .-1)
+  "Sex_M", "RestingECG_Normal", "RestingECG_ST", "Angina_Y"
+)
+
+output_names <- c("Probability of heart disease")
+```
+
+**Create converter and prepare test data.**
+
+```{r}
+# Create the Converter object
+converter <- convert(
+  model,
+  input_dim = 10,
+  input_names = input_names,
+  output_names = output_names
+)
+
+# Manually extract and concatenate the test data
+idxs <- test_ds$indices
+x_num <- ds_tensor$x_num[idxs, ]
+x_cat <- ds_tensor$x_cat[idxs, ]
+
+# Combine into one tensor and convert to R array
+input_tensor <- torch_cat(list(x_num, x_cat), dim = 2)
+input_data <- as_array(input_tensor)
+```
+
+**Apply Layer-wise Relevance Propagation (LRP).**
+
+```{r}
+# Run LRP with alpha-beta rule
+lrp_result <- run_lrp(converter, input_data, rule_name = "alpha_beta", rule_param = 1)
+
+# Check dimensions: Instances x Features x Outputs
+dim(get_result(lrp_result))
+```
+
+**Individual explanations.**
+
+```{r}
+# Individual plots for the first two test instances
+plot(lrp_result, data_idx = c(1, 2)) +
+  theme_bw() +
+  coord_flip() +
+  labs(
+    title = "Individual Feature Relevance",
+    subtitle = "LRP relevance scores for Patient 1 & 2",
+    x = "Features",
+    y = "Relevance Score"
+  )
+```
+
+**Global explanations.**
+
+```{r}
+# Global boxplot - overall feature importance across the entire test set
+boxplot(lrp_result) +
+  theme_bw() +
+  coord_flip() +
+  labs(
+    title = "Global Feature Importance",
+    subtitle = "Average LRP relevance scores across all test patients",
+    x = "Features",
+    y = "Mean Relevance Score"
+  )
+```
+
+**Global explanation with raw relevance scores.**
+
+```{r}
+# Another version of global boxplot with identity transformation
+boxplot(lrp_result, preprocess_FUN = identity) +
+  theme_bw() +
+  coord_flip() +
+  labs(
+    title = "Global Feature Importance",
+    subtitle = "Distribution of raw LRP relevance scores",
+    x = "Features",
+    y = "Relevance Score"
+  )
+```

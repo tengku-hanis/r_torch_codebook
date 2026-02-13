@@ -1,0 +1,259 @@
+# Tutorial 1: Basic deep neural network (binary classification)
+
+**Aims:** To predict a heart disease using a deep neural network.
+
+**Data:** `heartdisease` data from `MLDataR` package.
+
+**Code description:** This codes demonstrate the use of deep neural network through torch but at the same time, still using `tidymodels` functions for splitting data, preprocessing, and performance metrics.
+
+### **Packages**
+
+```{r}
+#| warning: false
+#| message: false
+library(torch)
+library(luz)
+library(tidyverse)
+library(tidymodels)
+library(MLDataR)
+```
+
+### **Data**
+
+```{r}
+heart_df <- 
+heartdisease %>% 
+mutate(across(c(Sex, RestingECG, Angina), as.factor))
+```
+
+**Explore data.**
+
+```{r}
+skimr::skim(heart_df)
+```
+
+### **Split data**
+
+```{r}
+set.seed(123) 
+split_ind <- initial_validation_split(heart_df, strata = "HeartDisease") 
+heart_train <- training(split_ind) 
+heart_val <- validation(split_ind) 
+heart_test <- testing(split_ind)
+```
+
+### **Preprocessing**
+
+```{r}
+heart_rc <- 
+recipe(HeartDisease ~., data = heart_train) %>%
+step_normalize(all_numeric_predictors()) %>%
+step_dummy(all_factor_predictors())
+
+heart_train_processed <- heart_rc %>% prep() %>% bake(new_data = NULL)
+
+heart_val_processed <- heart_rc %>% prep() %>% bake(new_data = heart_val)
+
+heart_test_processed <- heart_rc %>% prep() %>% bake(new_data = heart_test)
+```
+
+### Conver to dataloader
+
+**Convert to torch dataset**
+
+```{r}
+dat_train_torch <- 
+tensor_dataset(
+    # Features
+    heart_train_processed %>% 
+    select(-HeartDisease) %>% 
+    as.matrix() %>% 
+    torch_tensor(dtype = torch_float()), 
+    # Outcome
+    heart_train_processed$HeartDisease %>% 
+    torch_tensor(dtype = torch_float()) %>% 
+    torch_unsqueeze(2) 
+)
+
+dat_val_torch <- 
+tensor_dataset(
+    # Features
+    heart_val_processed %>% 
+    select(-HeartDisease) %>% 
+    as.matrix() %>% 
+    torch_tensor(dtype = torch_float()), 
+    # Outcome
+    heart_val_processed$HeartDisease %>% 
+    torch_tensor(dtype = torch_float()) %>% 
+    torch_unsqueeze(2)
+)
+
+dat_test_torch <- 
+tensor_dataset( 
+    # Features
+    heart_test_processed %>% 
+    select(-HeartDisease) %>% 
+    as.matrix() %>% 
+    torch_tensor(dtype = torch_float()),
+    # Outcome
+    heart_test_processed$HeartDisease %>% 
+    torch_tensor(dtype = torch_float()) %>% 
+    torch_unsqueeze(2) 
+)
+```
+
+**Dataloader**
+
+```{r}
+train_dl <- dataloader(dat_train_torch, batch_size = 10, shuffle = TRUE) 
+val_dl <- dataloader(dat_val_torch, batch_size = 10, shuffle = FALSE) 
+test_dl <- dataloader(dat_test_torch, batch_size = 10, shuffle = FALSE)
+```
+
+### Specify the model
+
+```{r}
+net <- nn_module( 
+    initialize = function(d_in){ 
+        self$net <- nn_sequential(
+            nn_linear(d_in, 32),
+            nn_relu(),
+            nn_dropout(0.5),
+            nn_linear(32, 64),
+            nn_relu(),
+            nn_dropout(0.5),
+            nn_linear(64, 1),
+            nn_sigmoid()
+            )
+        },
+    forward = function(x){
+        self$net(x) 
+    } 
+)
+```
+
+### Fit the model
+
+**Set parameters**
+
+```{r}
+d_in <- length(heart_train_processed) - 1 # no of features minus the outcome
+```
+
+**Fit**
+
+```{r}
+fitted <- 
+net %>% 
+setup( 
+    loss = nn_bce_loss(), 
+    optimizer = optim_adam, 
+    metrics = list(
+        luz_metric_binary_accuracy(), 
+        luz_metric_binary_auroc()) 
+) %>% 
+set_hparams(d_in = d_in) %>% 
+fit( 
+    train_dl, 
+    epoch = 50, 
+    valid_data = val_dl 
+)
+```
+
+### Training plot
+
+```{r}
+fitted %>% plot()
+```
+
+**Better plot**
+
+```{r}
+hist <- get_metrics(fitted)
+
+hist %>% 
+ggplot(aes(x = epoch, y = value, color = set)) + 
+geom_line(linewidth = 1) + # Draw lines 
+geom_point(size = 1.5) + # Add points for clarity 
+facet_wrap(~ metric, scales = "free_y", ncol = 1) + # Stack metrics vertically 
+theme_minimal() + 
+labs( 
+    title = "Training vs Validation Metrics", 
+    y = "Value", 
+    x = "Epoch", 
+    color = "Dataset" 
+)
+```
+
+### Re-fit the model
+
+**Fit**
+
+```{r}
+fitted2 <- 
+net %>% 
+setup( 
+    loss = nn_bce_loss(), 
+    optimizer = optim_adam, 
+    metrics = list( 
+        luz_metric_binary_accuracy(),
+        luz_metric_binary_auroc() ) 
+) %>% 
+set_hparams(d_in = d_in) %>% 
+fit( 
+    train_dl, 
+    epoch = 5, 
+    valid_data = val_dl 
+)
+```
+
+### Predict testing set
+
+```{r}
+y_pred <- fitted2 %>% predict(test_dl)
+
+dat_pred <- 
+y_pred %>% 
+as_array() %>% 
+as_tibble(.name_repair = "unique") %>% 
+ rename(prob = 1) %>%   
+mutate(
+    pred = factor(ifelse(prob > 0.5, 1, 0)),
+    true = factor(heart_test$HeartDisease)
+    )
+
+dat_pred
+```
+
+### Evaluate
+
+```{r}
+fitted %>% evaluate(test_dl) # Less accurate
+```
+
+**Confusion matrix**
+
+```{r}
+dat_pred %>% 
+conf_mat(true, pred) %>% 
+autoplot("heatmap")
+```
+
+**Accuracy**
+
+```{r}
+dat_pred %>% 
+accuracy(truth = true, estimate = pred)
+```
+
+**Plot ROC**
+
+```{r}
+dat_pred %>% 
+roc_curve(true, prob, event_level = "second") %>% 
+autoplot()
+
+# ROC-AUC
+dat_pred %>% 
+roc_auc(true, prob, event_level = "second")
+```

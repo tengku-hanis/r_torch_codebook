@@ -12,23 +12,51 @@ book:
   chapters:
     - index.qmd
     - intro.qmd
-    - tabular.qmd
-    - text.qmd
-    - image.qmd
-    - audio.qmd
-    - video.qmd
-    - others.qmd
+
+    - part: "Chapter 1: Deep neural network for tabular data"
+      chapters: 
+      - tabular_tutorial1.qmd
+      - tabular_tutorial2.qmd
+      - tabular_tutorial3.qmd
+      - tabular_tutorial4.qmd
+      - tabular_tutorial5.qmd
+
+    - part: "Chapter 2: Deep learning for text data"
+      chapters:
+      - text_tutorial1.qmd
+
+    - part: "Chapter 3: Deep learning for image data"
+      chapters:
+      - image_tutorial1.qmd
+
+    - part: "Chapter 4: Deep learning for audio data"
+      chapters: 
+      - audio_tutorial1.qmd
+
+    - part: "Chapter 5: Deep learning for video data"
+      chapters: 
+      - video_tutorial1.qmd
+
+    - part: "Chapter 6: Deep learning for other types of data"
+      chapters:
+      - others_tutorial1.qmd
+
     - references.qmd
 
 bibliography: references.bib
+
+execute:
+  freeze: auto  
 
 format:
   html:
     theme:
       - cosmo
       - brand
+    number-sections: true
+    number-depth: 1  # This is key - only number down to level 1 headings
+    toc: true
   pdf:
     documentclass: scrreprt
-
-editor: visual
-
+    number-sections: true
+    number-depth: 1  # Same for PDF

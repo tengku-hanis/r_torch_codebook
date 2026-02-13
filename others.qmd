@@ -1,1 +1,0 @@
-# Deep learning for other types of data
