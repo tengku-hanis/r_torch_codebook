@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./text_tutorial1.html" rel="next">
+<link href="./tabular_tutorial4.html" rel="next">
 <link href="./tabular_tutorial2.html" rel="prev">
 <link href="./images/thumbnail.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
@@ -168,7 +168,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tabular_tutorial1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Tutorial 1: Basic deep neural network</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Tutorial 1: Basic deep neural network (binary classification)</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -181,6 +181,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="./tabular_tutorial3.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Tutorial 3: Deep neural network with explainable method (binary classification)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tabular_tutorial4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tutorial 4: Deep neural network with categorical embedding (binary classification)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tabular_tutorial5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Tutorial 5: Deep neural network with resampling technique (binary classification)</span></span></a>
   </div>
 </li>
       </ul>
@@ -197,7 +209,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./text_tutorial1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tutorial</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Tutorial</span></span></a>
   </div>
 </li>
       </ul>
@@ -214,7 +226,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./image_tutorial1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Tutorial</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Tutorial</span></span></a>
   </div>
 </li>
       </ul>
@@ -231,7 +243,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./audio_tutorial1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Tutorial</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Tutorial</span></span></a>
   </div>
 </li>
       </ul>
@@ -248,7 +260,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./video_tutorial1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Tutorial</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Tutorial</span></span></a>
   </div>
 </li>
       </ul>
@@ -265,7 +277,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./others_tutorial1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Tutorial</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Tutorial</span></span></a>
   </div>
 </li>
       </ul>
@@ -286,17 +298,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#packages" id="toc-packages" class="nav-link active" data-scroll-target="#packages"><strong>Packages</strong></a></li>
-  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data"><strong>Data</strong></a></li>
-  <li><a href="#dataset-function" id="toc-dataset-function" class="nav-link" data-scroll-target="#dataset-function"><strong>Dataset function</strong></a></li>
-  <li><a href="#split-data-with-dataset-subsets" id="toc-split-data-with-dataset-subsets" class="nav-link" data-scroll-target="#split-data-with-dataset-subsets"><strong>Split data with dataset subsets</strong></a></li>
-  <li><a href="#convert-to-dataloader" id="toc-convert-to-dataloader" class="nav-link" data-scroll-target="#convert-to-dataloader"><strong>Convert to dataloader</strong></a></li>
-  <li><a href="#specify-the-model" id="toc-specify-the-model" class="nav-link" data-scroll-target="#specify-the-model"><strong>Specify the model</strong></a></li>
-  <li><a href="#fit-the-model" id="toc-fit-the-model" class="nav-link" data-scroll-target="#fit-the-model"><strong>Fit the model</strong></a></li>
-  <li><a href="#training-plot" id="toc-training-plot" class="nav-link" data-scroll-target="#training-plot"><strong>Training plot</strong></a></li>
-  <li><a href="#predict-testing-set" id="toc-predict-testing-set" class="nav-link" data-scroll-target="#predict-testing-set"><strong>Predict testing set</strong></a></li>
-  <li><a href="#evaluate" id="toc-evaluate" class="nav-link" data-scroll-target="#evaluate"><strong>Evaluate</strong></a></li>
-  <li><a href="#model-explainability-with-lrp" id="toc-model-explainability-with-lrp" class="nav-link" data-scroll-target="#model-explainability-with-lrp"><strong>Model explainability with LRP</strong></a></li>
+  <li><a href="#packages" id="toc-packages" class="nav-link active" data-scroll-target="#packages">Packages</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
+  <li><a href="#dataset-function" id="toc-dataset-function" class="nav-link" data-scroll-target="#dataset-function">Dataset function</a></li>
+  <li><a href="#split-data-with-dataset-subsets" id="toc-split-data-with-dataset-subsets" class="nav-link" data-scroll-target="#split-data-with-dataset-subsets">Split data with dataset subsets</a></li>
+  <li><a href="#convert-to-dataloader" id="toc-convert-to-dataloader" class="nav-link" data-scroll-target="#convert-to-dataloader">Convert to dataloader</a></li>
+  <li><a href="#specify-the-model" id="toc-specify-the-model" class="nav-link" data-scroll-target="#specify-the-model">Specify the model</a></li>
+  <li><a href="#fit-the-model" id="toc-fit-the-model" class="nav-link" data-scroll-target="#fit-the-model">Fit the model</a></li>
+  <li><a href="#training-plot" id="toc-training-plot" class="nav-link" data-scroll-target="#training-plot">Training plot</a></li>
+  <li><a href="#predict-testing-set" id="toc-predict-testing-set" class="nav-link" data-scroll-target="#predict-testing-set">Predict testing set</a></li>
+  <li><a href="#evaluate" id="toc-evaluate" class="nav-link" data-scroll-target="#evaluate">Evaluate</a></li>
+  <li><a href="#model-explainability-with-lrp" id="toc-model-explainability-with-lrp" class="nav-link" data-scroll-target="#model-explainability-with-lrp">Model explainability with LRP</a></li>
   </ul>
 </nav>
     </div>
@@ -326,7 +338,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>Data:</strong> <code>heartdisease</code> data from <code>MLDataR</code> package.</p>
 <p><strong>Code description:</strong> This code demonstrates the use of torch with custom dataset functions, training callbacks, and model explainability using the <code>innsight</code> package for binary classification with LRP.</p>
 <section id="packages" class="level3">
-<h3 class="anchored" data-anchor-id="packages"><strong>Packages</strong></h3>
+<h3 class="anchored" data-anchor-id="packages">Packages</h3>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(torch)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(luz)</span>
@@ -337,7 +349,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 <section id="data" class="level3">
-<h3 class="anchored" data-anchor-id="data"><strong>Data</strong></h3>
+<h3 class="anchored" data-anchor-id="data">Data</h3>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>heart_df <span class="ot">&lt;-</span> </span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  heartdisease <span class="sc">%&gt;%</span> </span>
@@ -563,7 +575,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 <section id="dataset-function" class="level3">
-<h3 class="anchored" data-anchor-id="dataset-function"><strong>Dataset function</strong></h3>
+<h3 class="anchored" data-anchor-id="dataset-function">Dataset function</h3>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>heart_dataset <span class="ot">&lt;-</span> <span class="fu">dataset</span>(</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">initialize =</span> <span class="cf">function</span>(df) {</span>
@@ -620,7 +632,7 @@ torch_tensor
 </div>
 </section>
 <section id="split-data-with-dataset-subsets" class="level3">
-<h3 class="anchored" data-anchor-id="split-data-with-dataset-subsets"><strong>Split data with dataset subsets</strong></h3>
+<h3 class="anchored" data-anchor-id="split-data-with-dataset-subsets">Split data with dataset subsets</h3>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) </span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">nrow</span>(heart_df)</span>
@@ -643,7 +655,7 @@ torch_tensor
 </div>
 </section>
 <section id="convert-to-dataloader" class="level3">
-<h3 class="anchored" data-anchor-id="convert-to-dataloader"><strong>Convert to dataloader</strong></h3>
+<h3 class="anchored" data-anchor-id="convert-to-dataloader">Convert to dataloader</h3>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>train_dl <span class="ot">&lt;-</span> train_ds <span class="sc">%&gt;%</span> </span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dataloader</span>(<span class="at">batch_size =</span> <span class="dv">10</span>, <span class="at">shuffle =</span> <span class="cn">TRUE</span>)</span>
@@ -656,7 +668,7 @@ torch_tensor
 </div>
 </section>
 <section id="specify-the-model" class="level3">
-<h3 class="anchored" data-anchor-id="specify-the-model"><strong>Specify the model</strong></h3>
+<h3 class="anchored" data-anchor-id="specify-the-model">Specify the model</h3>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>net <span class="ot">&lt;-</span> </span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nn_module</span>(</span>
@@ -682,7 +694,7 @@ torch_tensor
 </div>
 </section>
 <section id="fit-the-model" class="level3">
-<h3 class="anchored" data-anchor-id="fit-the-model"><strong>Fit the model</strong></h3>
+<h3 class="anchored" data-anchor-id="fit-the-model">Fit the model</h3>
 <p><strong>Set parameters</strong></p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>d_in <span class="ot">&lt;-</span> <span class="fu">length</span>(ds_tensor[<span class="dv">1</span>]<span class="sc">$</span>x[[<span class="dv">1</span>]]) <span class="sc">+</span> <span class="fu">length</span>(ds_tensor[<span class="dv">1</span>]<span class="sc">$</span>x[[<span class="dv">2</span>]]) <span class="co"># total number of features (6 numeric + 4 categorical = 10)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -712,7 +724,7 @@ torch_tensor
 </div>
 </section>
 <section id="training-plot" class="level3">
-<h3 class="anchored" data-anchor-id="training-plot"><strong>Training plot</strong></h3>
+<h3 class="anchored" data-anchor-id="training-plot">Training plot</h3>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>fitted <span class="sc">%&gt;%</span> <span class="fu">plot</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
@@ -755,7 +767,7 @@ torch_tensor
 </div>
 </section>
 <section id="predict-testing-set" class="level3">
-<h3 class="anchored" data-anchor-id="predict-testing-set"><strong>Predict testing set</strong></h3>
+<h3 class="anchored" data-anchor-id="predict-testing-set">Predict testing set</h3>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>y_pred <span class="ot">&lt;-</span> fitted <span class="sc">%&gt;%</span> <span class="fu">predict</span>(test_dl)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>y_true <span class="ot">&lt;-</span> ds_tensor<span class="sc">$</span>y[test_ds<span class="sc">$</span>indices] <span class="sc">%&gt;%</span> <span class="fu">as_array</span>()</span>
@@ -784,32 +796,32 @@ torch_tensor
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>dat_pred</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 185 × 3
-    prob pred  true 
-   &lt;dbl&gt; &lt;fct&gt; &lt;fct&gt;
- 1 0.144 0     0    
- 2 0.386 0     0    
- 3 0.119 0     0    
- 4 0.959 1     1    
- 5 0.123 0     0    
- 6 0.223 0     0    
- 7 0.309 0     0    
- 8 0.352 0     0    
- 9 0.797 1     0    
-10 0.135 0     1    
+     prob pred  true 
+    &lt;dbl&gt; &lt;fct&gt; &lt;fct&gt;
+ 1 0.0886 0     0    
+ 2 0.326  0     0    
+ 3 0.0819 0     0    
+ 4 0.957  1     1    
+ 5 0.0911 0     0    
+ 6 0.182  0     0    
+ 7 0.311  0     0    
+ 8 0.383  0     0    
+ 9 0.871  1     0    
+10 0.102  0     1    
 # ℹ 175 more rows</code></pre>
 </div>
 </div>
 </section>
 <section id="evaluate" class="level3">
-<h3 class="anchored" data-anchor-id="evaluate"><strong>Evaluate</strong></h3>
+<h3 class="anchored" data-anchor-id="evaluate">Evaluate</h3>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>fitted <span class="sc">%&gt;%</span> <span class="fu">evaluate</span>(test_dl)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>A `luz_module_evaluation`
 ── Results ─────────────────────────────────────────────────────────────────────
-loss: 0.4191
+loss: 0.4137
 acc: 0.8216
-auc: 0.8807</code></pre>
+auc: 0.8852</code></pre>
 </div>
 </div>
 <p><strong>Confusion matrix</strong></p>
@@ -855,12 +867,12 @@ auc: 0.8807</code></pre>
 <pre><code># A tibble: 1 × 3
   .metric .estimator .estimate
   &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
-1 roc_auc binary         0.882</code></pre>
+1 roc_auc binary         0.887</code></pre>
 </div>
 </div>
 </section>
 <section id="model-explainability-with-lrp" class="level3">
-<h3 class="anchored" data-anchor-id="model-explainability-with-lrp"><strong>Model explainability with LRP</strong></h3>
+<h3 class="anchored" data-anchor-id="model-explainability-with-lrp">Model explainability with LRP</h3>
 <p><strong>Prepare model for interpretation.</strong></p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the sequential model</span></span>
@@ -1381,8 +1393,8 @@ Skipping nn_dropout ...</code></pre>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./text_tutorial1.html" class="pagination-link" aria-label="Tutorial">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tutorial</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./tabular_tutorial4.html" class="pagination-link" aria-label="Tutorial 4: Deep neural network with categorical embedding (binary classification)">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tutorial 4: Deep neural network with categorical embedding (binary classification)</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

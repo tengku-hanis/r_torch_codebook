@@ -9,6 +9,11 @@ book:
   date-format: "MM/DD/YYYY"
   cover-image: images/book_cover.png
   favicon: images/thumbnail.png
+
+  sidebar:
+    style: "docked"
+    collapse-level: 1
+    
   chapters:
     - index.qmd
     - intro.qmd

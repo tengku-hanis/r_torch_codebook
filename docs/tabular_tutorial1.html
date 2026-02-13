@@ -183,6 +183,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Tutorial 3: Deep neural network with explainable method (binary classification)</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tabular_tutorial4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tutorial 4: Deep neural network with categorical embedding (binary classification)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tabular_tutorial5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Tutorial 5: Deep neural network with resampling technique (binary classification)</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -197,7 +209,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./text_tutorial1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tutorial</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Tutorial</span></span></a>
   </div>
 </li>
       </ul>
@@ -214,7 +226,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./image_tutorial1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Tutorial</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Tutorial</span></span></a>
   </div>
 </li>
       </ul>
@@ -231,7 +243,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./audio_tutorial1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Tutorial</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Tutorial</span></span></a>
   </div>
 </li>
       </ul>
@@ -248,7 +260,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./video_tutorial1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Tutorial</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Tutorial</span></span></a>
   </div>
 </li>
       </ul>
@@ -265,7 +277,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./others_tutorial1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Tutorial</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Tutorial</span></span></a>
   </div>
 </li>
       </ul>
@@ -286,10 +298,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#packages" id="toc-packages" class="nav-link active" data-scroll-target="#packages"><strong>Packages</strong></a></li>
-  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data"><strong>Data</strong></a></li>
-  <li><a href="#split-data" id="toc-split-data" class="nav-link" data-scroll-target="#split-data"><strong>Split data</strong></a></li>
-  <li><a href="#preprocessing" id="toc-preprocessing" class="nav-link" data-scroll-target="#preprocessing"><strong>Preprocessing</strong></a></li>
+  <li><a href="#packages" id="toc-packages" class="nav-link active" data-scroll-target="#packages">Packages</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
+  <li><a href="#split-data" id="toc-split-data" class="nav-link" data-scroll-target="#split-data">Split data</a></li>
+  <li><a href="#preprocessing" id="toc-preprocessing" class="nav-link" data-scroll-target="#preprocessing">Preprocessing</a></li>
   <li><a href="#conver-to-dataloader" id="toc-conver-to-dataloader" class="nav-link" data-scroll-target="#conver-to-dataloader">Conver to dataloader</a></li>
   <li><a href="#specify-the-model" id="toc-specify-the-model" class="nav-link" data-scroll-target="#specify-the-model">Specify the model</a></li>
   <li><a href="#fit-the-model" id="toc-fit-the-model" class="nav-link" data-scroll-target="#fit-the-model">Fit the model</a></li>
@@ -326,7 +338,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>Data:</strong> <code>heartdisease</code> data from <code>MLDataR</code> package.</p>
 <p><strong>Code description:</strong> This codes demonstrate the use of deep neural network through torch but at the same time, still using <code>tidymodels</code> functions for splitting data, preprocessing, and performance metrics.</p>
 <section id="packages" class="level3">
-<h3 class="anchored" data-anchor-id="packages"><strong>Packages</strong></h3>
+<h3 class="anchored" data-anchor-id="packages">Packages</h3>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(torch)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(luz)</span>
@@ -336,7 +348,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 <section id="data" class="level3">
-<h3 class="anchored" data-anchor-id="data"><strong>Data</strong></h3>
+<h3 class="anchored" data-anchor-id="data">Data</h3>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>heart_df <span class="ot">&lt;-</span> </span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>heartdisease <span class="sc">%&gt;%</span> </span>
@@ -562,7 +574,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 <section id="split-data" class="level3">
-<h3 class="anchored" data-anchor-id="split-data"><strong>Split data</strong></h3>
+<h3 class="anchored" data-anchor-id="split-data">Split data</h3>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) </span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>split_ind <span class="ot">&lt;-</span> <span class="fu">initial_validation_split</span>(heart_df, <span class="at">strata =</span> <span class="st">"HeartDisease"</span>) </span>
@@ -572,7 +584,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 <section id="preprocessing" class="level3">
-<h3 class="anchored" data-anchor-id="preprocessing"><strong>Preprocessing</strong></h3>
+<h3 class="anchored" data-anchor-id="preprocessing">Preprocessing</h3>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>heart_rc <span class="ot">&lt;-</span> </span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">recipe</span>(HeartDisease <span class="sc">~</span>., <span class="at">data =</span> heart_train) <span class="sc">%&gt;%</span></span>
@@ -764,16 +776,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code># A tibble: 184 × 3
     prob pred  true 
    &lt;dbl&gt; &lt;fct&gt; &lt;fct&gt;
- 1 0.252 0     1    
- 2 0.498 0     0    
- 3 0.752 1     1    
- 4 0.621 1     1    
- 5 0.380 0     0    
- 6 0.308 0     0    
- 7 0.300 0     0    
- 8 0.698 1     0    
- 9 0.678 1     0    
-10 0.128 0     0    
+ 1 0.327 0     1    
+ 2 0.411 0     0    
+ 3 0.775 1     1    
+ 4 0.615 1     1    
+ 5 0.303 0     0    
+ 6 0.258 0     0    
+ 7 0.289 0     0    
+ 8 0.535 1     0    
+ 9 0.686 1     0    
+10 0.170 0     0    
 # ℹ 174 more rows</code></pre>
 </div>
 </div>
@@ -785,9 +797,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-stdout">
 <pre><code>A `luz_module_evaluation`
 ── Results ─────────────────────────────────────────────────────────────────────
-loss: 0.3886
-acc: 0.8261
-auc: 0.9011</code></pre>
+loss: 0.379
+acc: 0.837
+auc: 0.9039</code></pre>
 </div>
 </div>
 <p><strong>Confusion matrix</strong></p>
@@ -833,7 +845,7 @@ auc: 0.9011</code></pre>
 <pre><code># A tibble: 1 × 3
   .metric .estimator .estimate
   &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
-1 roc_auc binary         0.885</code></pre>
+1 roc_auc binary         0.878</code></pre>
 </div>
 </div>
 

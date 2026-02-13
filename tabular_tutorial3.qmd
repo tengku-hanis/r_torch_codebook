@@ -6,7 +6,7 @@
 
 **Code description:** This code demonstrates the use of torch with custom dataset functions, training callbacks, and model explainability using the `innsight` package for binary classification with LRP.
 
-### **Packages**
+### Packages
 
 ```{r}
 #| warning: false
@@ -19,7 +19,7 @@ library(MLDataR)
 library(innsight)
 ```
 
-### **Data**
+### Data
 
 ```{r}
 heart_df <- 
@@ -33,7 +33,7 @@ heart_df <-
 skimr::skim(heart_df)
 ```
 
-### **Dataset function**
+### Dataset function
 
 ```{r}
 heart_dataset <- dataset(
@@ -64,7 +64,7 @@ ds_tensor <- heart_dataset(heart_df)
 ds_tensor[1]
 ```
 
-### **Split data with dataset subsets**
+### Split data with dataset subsets
 
 ```{r}
 set.seed(123) 
@@ -87,7 +87,7 @@ valid_ds <- dataset_subset(ds_tensor, valid_indices)
 test_ds  <- dataset_subset(ds_tensor, test_indices)
 ```
 
-### **Convert to dataloader**
+### Convert to dataloader
 
 ```{r}
 train_dl <- train_ds %>% 
@@ -100,7 +100,7 @@ test_dl <- test_ds %>%
   dataloader(batch_size = 10, shuffle = FALSE)
 ```
 
-### **Specify the model**
+### Specify the model
 
 ```{r}
 net <- 
@@ -126,7 +126,7 @@ net <-
   )
 ```
 
-### **Fit the model**
+### Fit the model
 
 **Set parameters**
 
@@ -159,7 +159,7 @@ fitted <-
   )
 ```
 
-### **Training plot**
+### Training plot
 
 ```{r}
 fitted %>% plot()
@@ -190,7 +190,7 @@ hist %>%
   )
 ```
 
-### **Predict testing set**
+### Predict testing set
 
 ```{r}
 y_pred <- fitted %>% predict(test_dl)
@@ -209,7 +209,7 @@ dat_pred <-
 dat_pred
 ```
 
-### **Evaluate**
+### Evaluate
 
 ```{r}
 fitted %>% evaluate(test_dl)
@@ -242,7 +242,7 @@ dat_pred %>%
   roc_auc(true, prob, event_level = "second")
 ```
 
-### **Model explainability with LRP**
+### Model explainability with LRP
 
 **Prepare model for interpretation.**
 

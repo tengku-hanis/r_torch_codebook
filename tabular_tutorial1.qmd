@@ -6,7 +6,7 @@
 
 **Code description:** This codes demonstrate the use of deep neural network through torch but at the same time, still using `tidymodels` functions for splitting data, preprocessing, and performance metrics.
 
-### **Packages**
+### Packages
 
 ```{r}
 #| warning: false
@@ -18,7 +18,7 @@ library(tidymodels)
 library(MLDataR)
 ```
 
-### **Data**
+### Data
 
 ```{r}
 heart_df <- 
@@ -32,7 +32,7 @@ mutate(across(c(Sex, RestingECG, Angina), as.factor))
 skimr::skim(heart_df)
 ```
 
-### **Split data**
+### Split data
 
 ```{r}
 set.seed(123) 
@@ -42,7 +42,7 @@ heart_val <- validation(split_ind)
 heart_test <- testing(split_ind)
 ```
 
-### **Preprocessing**
+### Preprocessing
 
 ```{r}
 heart_rc <- 

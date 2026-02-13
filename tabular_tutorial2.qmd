@@ -6,7 +6,7 @@
 
 **Code description:** This code demonstrates the use of torch with custom dataset functions, dataset subsets, and training callbacks including early stopping and best model checkpointing.
 
-### **Packages**
+### Packages
 
 ```{r}
 #| warning: false
@@ -18,7 +18,7 @@ library(tidymodels)
 library(MLDataR)
 ```
 
-### **Data**
+### Data
 
 ```{r}
 heart_df <- 
@@ -32,7 +32,7 @@ heart_df <-
 skimr::skim(heart_df)
 ```
 
-### **Dataset function**
+### Dataset function
 
 ```{r}
 heart_dataset <- dataset(
@@ -63,7 +63,7 @@ ds_tensor <- heart_dataset(heart_df)
 ds_tensor[1]
 ```
 
-### **Split data with dataset subsets**
+### Split data with dataset subsets
 
 ```{r}
 set.seed(123) 
@@ -86,7 +86,7 @@ valid_ds <- dataset_subset(ds_tensor, valid_indices)
 test_ds  <- dataset_subset(ds_tensor, test_indices)
 ```
 
-### **Convert to dataloader**
+### Convert to dataloader
 
 ```{r}
 train_dl <- train_ds %>% 
@@ -99,7 +99,7 @@ test_dl <- test_ds %>%
   dataloader(batch_size = 10, shuffle = FALSE)
 ```
 
-### **Specify the model**
+### Specify the model
 
 ```{r}
 net <- 
@@ -125,7 +125,7 @@ net <-
   )
 ```
 
-### **Fit the model**
+### Fit the model
 
 **Set parameters**
 
@@ -158,7 +158,7 @@ fitted <-
   )
 ```
 
-### **Training plot**
+### Training plot
 
 ```{r}
 fitted %>% plot()
@@ -189,11 +189,11 @@ hist %>%
   )
 ```
 
-### **Re-fit the model**
+### Re-fit the model
 
 *Note: No need to refit manually since we use `luz_callback_keep_best_model()` to automatically save the best model based on validation loss.*
 
-### **Predict testing set** 
+### Predict testing set
 
 ```{r}
 y_pred <- fitted %>% predict(test_dl)
@@ -212,7 +212,7 @@ dat_pred <-
 dat_pred
 ```
 
-### **Evaluate** 
+### Evaluate
 
 ```{r}
 fitted %>% evaluate(test_dl)
