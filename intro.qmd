@@ -13,11 +13,8 @@ This book is a consolidated repository of R code for deep learning using the `to
 The aim of this book is to provide a single, searchable location for all R-based `torch` implementations.
 
 -   **Code-First:** Text is kept to a minimum. The value lies in the executable syntax.
-
 -   **Modality-Driven:** Chapters are organized by data type (Tabular, Image, Audio, Video), reflecting the progression of tensor dimensions and architectural complexity.
-
 -   **Standardized Workflow:** Every analysis follows a consistent logical flow:
-
     1.  **Dataset Description:** A brief overview of the data used.
 
     2.  **Objectives:** The specific goal of the deep learning task (e.g., classification, regression).
@@ -31,9 +28,7 @@ This book assumes a working knowledge of the R programming language and a basic 
 Readers are encouraged to:
 
 1.  **Search by Modality:** Use the sidebar to find the data type relevant to your project.
-
 2.  **Adapt the Recipes:** Copy the code blocks and swap the dataset description/loader with your own local data.
-
 3.  **Cross-Reference:** Observe how `torch` handles different tensor dimensions as you move from Tabular (2D) to Video (5D) data.
 
 ## Technical Stack
@@ -41,9 +36,7 @@ Readers are encouraged to:
 All examples are built using the latest versions of the following R packages:
 
 -   **`torch`**: The core tensor and autograd library.
-
 -   **`luz`**: High-level API for model training and management.
-
 -   **`torchvision` / `torchaudio`**: Specialized utilities for imaging and signal processing.
 
 ## License & Attribution
