@@ -1,5 +1,9 @@
 # Preface {.unnumbered}
 
+::: callout-warning
+## This book is in its early drafting stages; many portions of the book are unfinished and all of it will go through significant revision and refinement.
+:::
+
 Deep learning (DL) and artificial intelligence (AI) are very popular nowadays — at least in Malaysia at the time I am writing this chapter. There are numerous open‑source and freely available resources to learn these topics, especially deep learning. The two most popular software ecosystems used in this area are Python and R. Python has been the industry standard; R, however, is catching up quickly.
 
 In the Python ecosystem the two main libraries are TensorFlow and PyTorch. On the R side there are corresponding packages: tensorflow and torch. The tensorflow R package is essentially a wrapper around the Python TensorFlow API: although we write code in R, computations run in Python on the backend, and many error and warning messages therefore originate from Python. In recent years TensorFlow has reduced its GPU support. At the time of writing, macOS 12.0 (Monterey) or later (64‑bit) does not have official GPU support, and Windows (native) — Windows 7 or later (64‑bit) — also lacks GPU support for TensorFlow versions beyond 2.10. Despite these limitations, TensorFlow’s earlier establishment means there is a large selection of tutorials and books for running deep learning with TensorFlow.

@@ -2,6 +2,10 @@
 
 Welcome to **The R torch codebook**.
 
+::: callout-warning
+## This book is in its early drafting stages; many portions of the book are unfinished and all of it will go through significant revision and refinement.
+:::
+
 This book is a consolidated repository of R code for deep learning using the `torch` ecosystem. Unlike traditional textbooks, this is not a theoretical guide. It is designed as a **functional compendium** for practitioners who want to move straight to implementation across diverse data modalities.
 
 ## Core Philosophy
