@@ -16,9 +16,7 @@ The aim of this book is to provide a single, searchable location for all R-based
 -   **Modality-Driven:** Chapters are organized by data type (Tabular, Image, Audio, Video), reflecting the progression of tensor dimensions and architectural complexity.
 -   **Standardized Workflow:** Every analysis follows a consistent logical flow:
     1.  **Dataset Description:** A brief overview of the data used.
-
     2.  **Objectives:** The specific goal of the deep learning task (e.g., classification, regression).
-
     3.  **Implementation:** The complete `torch` code required to load data, build the model, and execute training.
 
 ## How to Use This Book
